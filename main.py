@@ -16,17 +16,10 @@
 # the OECD data doesn't include the effect of the UK residence nil rate band - I have added it
 # undoubtedly there are other special rules/exemptions in other jurisdictions not included in the data
 
-import chart_studio.plotly as py
 import plotly.graph_objects as go
 import pandas as pd
 from scipy import stats
 from PIL import Image
-
-# the next line should be uncommented when chart studio is first run - it saves credentials in ~/.plotly
-# chart_studio.tools.set_credentials_file(username='taxpolicy', api_key='SECRET')
-
-# alternatively if you just want to display charts locally...
-# ... replace py.plot with fig.show (as shown in comments below)
 
 max_estate_size = 100  # x axis max - largest estate size we chart, as multiple of average earnings
 estate_resolution = 0.1  # the steps we go up
@@ -158,12 +151,12 @@ for country in range (0,len(df)):
 
 
 
-# now create chart of estate value vs effective rate
-py.plot(fig, filename = f'IHT_ETR_{max_estate_size}', auto_open=True)
+fig.show()
 
-# or for local version, replace the py.plt with:
-# fig.show()
-
+# note if hosting on github e.g.
+# https://htmlpreview.github.io/?https://github.com/DanNeidle/IHT_effective_rates/main/OECD_IHT_100x.html
+# embed into Wordpress with
+# <iframe src="https://htmlpreview.github.io/?https://github.com/DanNeidle/IHT_effective_rates/main/OECD_IHT_100x.html" width="100%" height="800"></iframe>
 
 # second chart - effective rate vs IHT as % of GDP
 layout = go.Layout(
@@ -217,11 +210,8 @@ fig2.add_trace(go.Scatter(
     name="lines",
     showlegend=False))
 
-# now plot it:
-py.plot(fig2, filename=f'IHT_ETR_vs_revenue_{max_estate_size}', auto_open=True)
 
-# or for local version, replace the py.plt with:
-# fig2.show()
+fig2.show()
 
 
 
@@ -278,9 +268,6 @@ fig3.add_trace(go.Scatter(
     showlegend=False))
 
 # now plot it:
-py.plot(fig3, filename = 'IHT_statutory_rate_vs_revenue', auto_open=True)
-
-# or for local version, replace the py.plt with:
-# fig3.show()
+fig3.show()
 
 
